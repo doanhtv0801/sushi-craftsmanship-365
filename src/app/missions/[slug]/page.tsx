@@ -55,7 +55,7 @@ export default async function MissionDetailPage({ params }: PageProps) {
           {localize(mission.title, "en")}
         </h1>
         <p className="max-w-md text-sumi">
-          This mission&rsquo;s full lesson content is coming soon. Missions 001–010 are
+          This mission&rsquo;s full lesson content is coming soon. Missions 001–150 are
           fully available today — {stage && `part of ${localize(stage.title, "en")}`}.
         </p>
         <Link href="/missions" className="text-sm font-medium text-accent hover:underline">
