@@ -269,7 +269,7 @@ let cachedStubs: Mission[] | null = null;
 export function getMissionStubs(): Mission[] {
   if (cachedStubs) return cachedStubs;
   const stubs: Mission[] = [];
-  for (let n = 11; n <= 365; n++) {
+  for (let n = 51; n <= 365; n++) {
     stubs.push(buildStub(n));
   }
   cachedStubs = stubs;

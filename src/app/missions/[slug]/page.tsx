@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ArrowLeft, Clock, Sparkles } from "lucide-react";
-import { getMissionBySlug, SEED_MISSIONS } from "@/data/missions";
+import { getMissionBySlug, getAllMissions } from "@/data/missions";
 import { getStageForMissionNumber } from "@/data/stages";
 import { Badge } from "@/components/ui/badge";
 import { VocabularyTable } from "@/components/missions/vocabulary-table";
@@ -15,7 +15,9 @@ interface PageProps {
 }
 
 export async function generateStaticParams() {
-  return SEED_MISSIONS.map((m) => ({ slug: m.slug }));
+  return getAllMissions()
+    .filter((m) => m.hasFullContent)
+    .map((m) => ({ slug: m.slug }));
 }
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {

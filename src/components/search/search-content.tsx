@@ -5,7 +5,7 @@ import Link from "next/link";
 import { Search as SearchIcon, BookText, Compass } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
-import { getAllMissions, SEED_MISSIONS } from "@/data/missions";
+import { getAllMissions } from "@/data/missions";
 import { localize } from "@/types/locale";
 import type { VocabularyEntry } from "@/types/database";
 
@@ -20,10 +20,12 @@ export function SearchContent() {
   const allMissions = useMemo(() => getAllMissions(), []);
   const allVocab = useMemo<VocabHit[]>(
     () =>
-      SEED_MISSIONS.flatMap((m) =>
-        m.vocabulary.map((v) => ({ ...v, missionNumber: m.missionNumber, missionSlug: m.slug }))
-      ),
-    []
+      allMissions
+        .filter((m) => m.hasFullContent)
+        .flatMap((m) =>
+          m.vocabulary.map((v) => ({ ...v, missionNumber: m.missionNumber, missionSlug: m.slug }))
+        ),
+    [allMissions]
   );
 
   const q = query.trim().toLowerCase();
