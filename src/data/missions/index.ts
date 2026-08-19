@@ -1,16 +1,20 @@
 import type { Mission } from "@/types/database";
 import { SEED_MISSIONS } from "./seed-missions";
 import { SEED_MISSIONS_011_050 } from "./seed-missions-011-050";
+import { SEED_MISSIONS_051_100 } from "./seed-missions-051-100";
 import { getMissionStubs } from "./mission-stubs";
 
 let cachedAll: Mission[] | null = null;
 
-/** All 365 missions — 001–050 fully authored (Stage 1 complete), 051–365 placeholder stubs. */
+/** All 365 missions — 001–100 fully authored (Stages 1–2 complete), 101–365 placeholder stubs. */
 export function getAllMissions(): Mission[] {
   if (cachedAll) return cachedAll;
-  cachedAll = [...SEED_MISSIONS, ...SEED_MISSIONS_011_050, ...getMissionStubs()].sort(
-    (a, b) => a.missionNumber - b.missionNumber
-  );
+  cachedAll = [
+    ...SEED_MISSIONS,
+    ...SEED_MISSIONS_011_050,
+    ...SEED_MISSIONS_051_100,
+    ...getMissionStubs(),
+  ].sort((a, b) => a.missionNumber - b.missionNumber);
   return cachedAll;
 }
 
